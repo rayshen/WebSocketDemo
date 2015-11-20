@@ -11,8 +11,6 @@
 #import "MessagesViewController.h"
 @interface ViewController : MessagesViewController<SocketIODelegate>{
     SocketIO * socketIO;
-    UILabel *tt;
-    UITextField *messageTF;
 }
 @property (strong, nonatomic) NSMutableArray *messages;
 @end

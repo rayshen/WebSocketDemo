@@ -22,46 +22,14 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    self.title = @"聊天";
+
     
     socketIO = [[SocketIO alloc] initWithDelegate:self];
     //socketIO.useSecure = YES;
     [socketIO connectToHost:@"localhost" onPort:8127];
-    //[socketIO connectToHost:@"10.13.50.158" onPort:80];
-    
-//    messageTF=[[UITextField alloc]initWithFrame:CGRectMake(0,6,220,30)];
-//    messageTF.layer.cornerRadius=6;
-//    messageTF.layer.borderColor=[[UIColor blackColor] CGColor];
-//    messageTF.layer.borderWidth=2;
-//    messageTF.backgroundColor=[UIColor whiteColor];
-//    messageTF.contentHorizontalAlignment=UIControlContentHorizontalAlignmentCenter;
-//    messageTF.placeholder=@"请输入消息格式";
-//    [self.view addSubview:messageTF];
-//    
-//    
-//    UIButton *sendbutton=[UIButton buttonWithType:UIButtonTypeRoundedRect];
-//    sendbutton.frame=CGRectMake(230,4 ,50,40);
-//    [sendbutton setTitle:@"send" forState:UIControlStateNormal];
-//    [sendbutton setTitle:@"send" forState:UIControlStateHighlighted];
-//    [sendbutton addTarget:self action:@selector(sendMessage) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:sendbutton];
-//    
-//    tt =[[UILabel alloc]initWithFrame:CGRectMake(0, 50, 320, 100)];
-//    tt.lineBreakMode=NSLineBreakByWordWrapping;
-//    tt.numberOfLines=0;
-//    [self.view addSubview:tt];
-    
-    
-    self.title = @"机器人";
-    
     self.messages = [[NSMutableArray alloc] initWithObjects:nil];
 
-}
-
-
--(void)sendMessage{
-    
-    [self sendMessageToWebSocket:messageTF.text];
 }
 
 -(void)sendMessageToWebSocket:(NSString *)str
@@ -73,20 +41,6 @@
     };
     [socketIO sendMessage:str withAcknowledge:cb];
 }
-
-- (void) viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-}
-
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-}
-
-
-
 
 - (void) socketIO:(SocketIO *)socket didReceiveEvent:(SocketIOPacket *)packet
 {
